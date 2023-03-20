@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-world-ui
+  namespace: argocd-helloworld
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: hello-world-ui
+  template:
+    metadata:
+      labels:
+        app: hello-world-ui
+    spec:
+      containers:
+      - image: paulbouwer/hello-kubernetes:1.10
+        name: helloworld-ui
+        ports:
+        - containerPort: 80
